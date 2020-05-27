@@ -35,7 +35,7 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
             .data(pool.clone())
-            .wrap(middleware::Logger::default())
+            .data(web::JsonConfig::default().limit(4096))
             .wrap(IdentityService::new(
                 CookieIdentityPolicy::new(utils::SECRET_KEY.as_bytes())
                     .name("auth")
@@ -44,7 +44,7 @@ async fn main() -> std::io::Result<()> {
                     .max_age_time(chrono::Duration::days(1))
                     .secure(false),
             ))
-            .data(web::JsonConfig::default().limit(4096))
+            .wrap(middleware::Logger::default())
             .service(
                 web::scope("/api")
                     .service(
