@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  server-actix:
+    build: ./
+    ports: 
+      - "3001:3001"
+    volumes:
+      - ./:/usr/src/app
+    links:
+      - db
+    # diesel infer_schema macro gives warnings with this flag.
+    # environment:
+    #   - CARGO_INCREMENTAL=1
+    command: bash -c "bash ./wait-for-it.sh db:3306 -q -- diesel setup && cargo watch -x run"
+
+  db:
+    image: "mysql:5.7.28"
+    ports: 
+      - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql/data/mysqldata
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATA: /var/lib/mysql/data/mysqldata
+
+# cargo will try to redownload packages @ docker-compose up so store them here.
+volumes:
+  mysqldata: {}
