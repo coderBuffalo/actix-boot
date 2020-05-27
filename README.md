@@ -1,10 +1,10 @@
-# diesel
+# usage
 
-Diesel's `Getting Started` guide using MYSQL for Actix web
+### diesel
 
-## Usage
+Diesel's [Getting Started](http://diesel.rs/guides/getting-started/) guide using MYSQL for Actix web
 
-### init database mysql
+### setup mysql
 
 ```bash
 cd actix-web
