@@ -62,7 +62,8 @@ async fn main() -> std::io::Result<()> {
                             .route(web::get().to(handlers::auth::get_me)),
                     ),
             )
-            .default_service(Files::new("", "../frontend/public"))
+            .service(Files::new("/images", "./static/images/"))
+            .default_service(Files::new("/", "./static/root/").index_file("index.html"))
     })
     .bind(&bind_address)?
     .run()

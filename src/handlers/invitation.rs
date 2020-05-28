@@ -4,7 +4,7 @@ use serde::Deserialize;
 
 use crate::errors::ServiceError;
 use crate::models::{invitation::Invitation, Pool};
-use crate::services::email::send_invitation;
+// use crate::services::email::send_invitation;
 
 #[derive(Deserialize)]
 pub struct InvitationData {
@@ -33,8 +33,9 @@ fn create_invitation(
     eml: String,
     pool: web::Data<Pool>,
 ) -> Result<(), crate::errors::ServiceError> {
-    let invitation = dbg!(query(eml, pool)?);
-    send_invitation(&invitation)
+    let _ = dbg!(query(eml, pool)?);
+    Ok(())
+    // send_invitation(&invitation)
 }
 
 /// Diesel query
