@@ -62,6 +62,11 @@ async fn main() -> std::io::Result<()> {
                             .route(web::get().to(handlers::auth::get_me)),
                     ),
             )
+            .service(
+                web::resource("/upload")
+                    .route(web::get().to(handlers::upload::form))
+                    .route(web::post().to(handlers::upload::file)),
+            )
             .service(Files::new("/images", "./static/images/"))
             .default_service(Files::new("/", "./static/root/").index_file("index.html"))
     })
