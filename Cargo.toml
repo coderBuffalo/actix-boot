@@ -5,7 +5,7 @@ authors = ["Johnson <wyshb520@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-async-std = "1.4.0"
+async-std = "1.6.0"
 actix-multipart = "0.2.0"
 actix-identity = "0.2.1"
 actix-rt = "1.1.1"
